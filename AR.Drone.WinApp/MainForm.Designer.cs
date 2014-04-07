@@ -56,7 +56,24 @@
             this.btnStopRecording = new System.Windows.Forms.Button();
             this.btnReplay = new System.Windows.Forms.Button();
             this.btnAutopilot = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.joyLabel = new System.Windows.Forms.Label();
+            this.joyValue = new System.Windows.Forms.Label();
+            this.oneHoLabel = new System.Windows.Forms.Label();
+            this.oneVeLabel = new System.Windows.Forms.Label();
+            this.twoHoLabel = new System.Windows.Forms.Label();
+            this.trigBtnLabel = new System.Windows.Forms.Label();
+            this.joySettingsBtn = new System.Windows.Forms.Button();
+            this.rollMultSetBox = new System.Windows.Forms.NumericUpDown();
+            this.pitchMultSetBox = new System.Windows.Forms.NumericUpDown();
+            this.yawMultSetBox = new System.Windows.Forms.NumericUpDown();
+            this.gazMultSetBox = new System.Windows.Forms.NumericUpDown();
+            this.StartBtnLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rollMultSetBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pitchMultSetBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yawMultSetBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gazMultSetBox)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStart
@@ -240,7 +257,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvInfo.Location = new System.Drawing.Point(661, 41);
             this.tvInfo.Name = "tvInfo";
-            this.tvInfo.Size = new System.Drawing.Size(291, 480);
+            this.tvInfo.Size = new System.Drawing.Size(291, 580);
             this.tvInfo.TabIndex = 18;
             // 
             // tmrVideoUpdate
@@ -318,11 +335,198 @@
             this.btnAutopilot.UseVisualStyleBackColor = true;
             this.btnAutopilot.Click += new System.EventHandler(this.btnAutopilot_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // joyLabel
+            // 
+            this.joyLabel.AutoSize = true;
+            this.joyLabel.Location = new System.Drawing.Point(12, 508);
+            this.joyLabel.Name = "joyLabel";
+            this.joyLabel.Size = new System.Drawing.Size(45, 13);
+            this.joyLabel.TabIndex = 26;
+            this.joyLabel.Text = "Joystick";
+            // 
+            // joyValue
+            // 
+            this.joyValue.AutoSize = true;
+            this.joyValue.Location = new System.Drawing.Point(360, 508);
+            this.joyValue.Name = "joyValue";
+            this.joyValue.Size = new System.Drawing.Size(101, 13);
+            this.joyValue.TabIndex = 27;
+            this.joyValue.Text = "roll/pitch    yaw/gaz";
+            // 
+            // oneHoLabel
+            // 
+            this.oneHoLabel.AutoSize = true;
+            this.oneHoLabel.Location = new System.Drawing.Point(359, 531);
+            this.oneHoLabel.Name = "oneHoLabel";
+            this.oneHoLabel.Size = new System.Drawing.Size(39, 13);
+            this.oneHoLabel.TabIndex = 28;
+            this.oneHoLabel.Text = "oneHo";
+            // 
+            // oneVeLabel
+            // 
+            this.oneVeLabel.AutoSize = true;
+            this.oneVeLabel.Location = new System.Drawing.Point(360, 564);
+            this.oneVeLabel.Name = "oneVeLabel";
+            this.oneVeLabel.Size = new System.Drawing.Size(38, 13);
+            this.oneVeLabel.TabIndex = 29;
+            this.oneVeLabel.Text = "oneVe";
+            // 
+            // twoHoLabel
+            // 
+            this.twoHoLabel.AutoSize = true;
+            this.twoHoLabel.Location = new System.Drawing.Point(417, 531);
+            this.twoHoLabel.Name = "twoHoLabel";
+            this.twoHoLabel.Size = new System.Drawing.Size(38, 13);
+            this.twoHoLabel.TabIndex = 30;
+            this.twoHoLabel.Text = "twoHo";
+            // 
+            // trigBtnLabel
+            // 
+            this.trigBtnLabel.AutoSize = true;
+            this.trigBtnLabel.Location = new System.Drawing.Point(416, 564);
+            this.trigBtnLabel.Name = "trigBtnLabel";
+            this.trigBtnLabel.Size = new System.Drawing.Size(37, 13);
+            this.trigBtnLabel.TabIndex = 31;
+            this.trigBtnLabel.Text = "trigBtn";
+            // 
+            // joySettingsBtn
+            // 
+            this.joySettingsBtn.Location = new System.Drawing.Point(12, 531);
+            this.joySettingsBtn.Name = "joySettingsBtn";
+            this.joySettingsBtn.Size = new System.Drawing.Size(75, 23);
+            this.joySettingsBtn.TabIndex = 32;
+            this.joySettingsBtn.Text = "joySettings";
+            this.joySettingsBtn.UseVisualStyleBackColor = true;
+            this.joySettingsBtn.Click += new System.EventHandler(this.joySettingsBtn_Click);
+            // 
+            // rollMultSetBox
+            // 
+            this.rollMultSetBox.DecimalPlaces = 1;
+            this.rollMultSetBox.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.rollMultSetBox.Location = new System.Drawing.Point(290, 529);
+            this.rollMultSetBox.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.rollMultSetBox.Name = "rollMultSetBox";
+            this.rollMultSetBox.Size = new System.Drawing.Size(52, 20);
+            this.rollMultSetBox.TabIndex = 33;
+            this.rollMultSetBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.rollMultSetBox.ValueChanged += new System.EventHandler(this.rollMultSetBox_ValueChanged);
+            // 
+            // pitchMultSetBox
+            // 
+            this.pitchMultSetBox.DecimalPlaces = 1;
+            this.pitchMultSetBox.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.pitchMultSetBox.Location = new System.Drawing.Point(290, 562);
+            this.pitchMultSetBox.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.pitchMultSetBox.Name = "pitchMultSetBox";
+            this.pitchMultSetBox.Size = new System.Drawing.Size(52, 20);
+            this.pitchMultSetBox.TabIndex = 34;
+            this.pitchMultSetBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.pitchMultSetBox.ValueChanged += new System.EventHandler(this.pitchMultSetBox_ValueChanged);
+            // 
+            // yawMultSetBox
+            // 
+            this.yawMultSetBox.DecimalPlaces = 1;
+            this.yawMultSetBox.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.yawMultSetBox.Location = new System.Drawing.Point(470, 529);
+            this.yawMultSetBox.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.yawMultSetBox.Name = "yawMultSetBox";
+            this.yawMultSetBox.Size = new System.Drawing.Size(52, 20);
+            this.yawMultSetBox.TabIndex = 35;
+            this.yawMultSetBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.yawMultSetBox.ValueChanged += new System.EventHandler(this.yawMultSetBox_ValueChanged);
+            // 
+            // gazMultSetBox
+            // 
+            this.gazMultSetBox.DecimalPlaces = 1;
+            this.gazMultSetBox.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.gazMultSetBox.Location = new System.Drawing.Point(470, 562);
+            this.gazMultSetBox.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.gazMultSetBox.Name = "gazMultSetBox";
+            this.gazMultSetBox.Size = new System.Drawing.Size(52, 20);
+            this.gazMultSetBox.TabIndex = 36;
+            this.gazMultSetBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gazMultSetBox.ValueChanged += new System.EventHandler(this.gazMultSetBox_ValueChanged);
+            // 
+            // StartBtnLabel
+            // 
+            this.StartBtnLabel.AutoSize = true;
+            this.StartBtnLabel.Location = new System.Drawing.Point(174, 530);
+            this.StartBtnLabel.Name = "StartBtnLabel";
+            this.StartBtnLabel.Size = new System.Drawing.Size(45, 13);
+            this.StartBtnLabel.TabIndex = 37;
+            this.StartBtnLabel.Text = "StartBtn";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 533);
+            this.ClientSize = new System.Drawing.Size(964, 633);
+            this.Controls.Add(this.StartBtnLabel);
+            this.Controls.Add(this.gazMultSetBox);
+            this.Controls.Add(this.yawMultSetBox);
+            this.Controls.Add(this.pitchMultSetBox);
+            this.Controls.Add(this.rollMultSetBox);
+            this.Controls.Add(this.joySettingsBtn);
+            this.Controls.Add(this.trigBtnLabel);
+            this.Controls.Add(this.twoHoLabel);
+            this.Controls.Add(this.oneVeLabel);
+            this.Controls.Add(this.oneHoLabel);
+            this.Controls.Add(this.joyValue);
+            this.Controls.Add(this.joyLabel);
             this.Controls.Add(this.btnAutopilot);
             this.Controls.Add(this.btnReplay);
             this.Controls.Add(this.btnStopRecording);
@@ -351,7 +555,12 @@
             this.Name = "MainForm";
             this.Text = "AR.Drone Control";
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rollMultSetBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pitchMultSetBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yawMultSetBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gazMultSetBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -384,6 +593,19 @@
         private System.Windows.Forms.Button btnStopRecording;
         private System.Windows.Forms.Button btnReplay;
         private System.Windows.Forms.Button btnAutopilot;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label joyLabel;
+        private System.Windows.Forms.Label joyValue;
+        private System.Windows.Forms.Label oneHoLabel;
+        private System.Windows.Forms.Label oneVeLabel;
+        private System.Windows.Forms.Label twoHoLabel;
+        private System.Windows.Forms.Label trigBtnLabel;
+        private System.Windows.Forms.Button joySettingsBtn;
+        private System.Windows.Forms.NumericUpDown rollMultSetBox;
+        private System.Windows.Forms.NumericUpDown pitchMultSetBox;
+        private System.Windows.Forms.NumericUpDown yawMultSetBox;
+        private System.Windows.Forms.NumericUpDown gazMultSetBox;
+        private System.Windows.Forms.Label StartBtnLabel;
     }
 }
 

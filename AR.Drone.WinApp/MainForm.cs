@@ -19,6 +19,8 @@ using AR.Drone.Avionics;
 using AR.Drone.Avionics.Objectives;
 using AR.Drone.Avionics.Objectives.IntentObtainers;
 
+using SlimDX.DirectInput;
+
 namespace AR.Drone.WinApp
 {
     public partial class MainForm : Form
@@ -39,6 +41,16 @@ namespace AR.Drone.WinApp
         private FileStream _recorderStream;
         private Autopilot _autopilot;
 
+
+        public Joystick myJoy;
+        public IList<DeviceInstance> myList;
+        public byte[] hidData = new byte[32];
+        public float deadZone = 0.15f;
+        public float yawMultiplier = 1.0f;
+        public float pitchMultiplier = 1.0f;
+        public float rollMultiplier = 1.0f;
+        public float gazMultiplier = 1.0f;
+
         public MainForm()
         {
             InitializeComponent();
@@ -57,6 +69,17 @@ namespace AR.Drone.WinApp
             _playerForms = new List<PlayerForm>();
 
             _videoPacketDecoderWorker.UnhandledException += UnhandledException;
+            
+            DirectInput dinput = new DirectInput();
+            myList = dinput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly);
+
+            DeviceInstance myJoyInput = (DeviceInstance)myList[0];
+            
+            Guid myGuid = myJoyInput.InstanceGuid;
+            myJoy = new Joystick(dinput, myGuid);
+            
+            myJoy.Acquire();
+             
         }
 
         private void UnhandledException(object sender, Exception exception)
@@ -463,6 +486,73 @@ namespace AR.Drone.WinApp
                 _autopilot.Active = true;
                 btnAutopilot.ForeColor = Color.Red;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (myJoy.GetCurrentState().IsPressed(0)) {
+            
+                StartBtnLabel.Text = "Take Off!";
+                _droneClient.Takeoff();
+            }
+
+            if (myJoy.GetCurrentState().IsPressed(1)){
+                StartBtnLabel.Text = "Land!";
+                _droneClient.Land();
+            }
+
+            //yaw
+            float oneHo = (float)(myJoy.GetCurrentState().X / 6553-5)/10.0f;
+            if (Math.Abs(oneHo) < deadZone)
+                oneHo = 0.0f;
+            //pitch
+            float oneVe = (float)(myJoy.GetCurrentState().Y / 6553 - 5)/10.0f;
+            if (Math.Abs(oneVe) < deadZone)
+                oneVe = 0.0f;
+            //roll
+            float twoHo = (float)(myJoy.GetCurrentState().RotationX / 6553 - 5)/10.0f;
+            if (Math.Abs(twoHo) < deadZone)
+                twoHo = 0.0f;
+            //up
+            float trigBtn = (float)(myJoy.GetCurrentState().Z / 6553 - 5)/10.0f;
+
+            oneHoLabel.Text = oneHo.ToString();
+            oneVeLabel.Text = oneVe.ToString();
+            trigBtnLabel.Text = trigBtn.ToString();
+            twoHoLabel.Text = twoHo.ToString();
+           
+            
+            _droneClient.Progress(FlightMode.Progressive, yaw: twoHo * yawMultiplier, pitch: oneVe * pitchMultiplier, roll: oneHo * rollMultiplier, gaz: trigBtn * gazMultiplier);
+
+
+            return;             
+
+        }
+
+        private void joySettingsBtn_Click(object sender, EventArgs e)
+        {
+            myJoy.RunControlPanel();
+        }
+
+        private void rollMultSetBox_ValueChanged(object sender, EventArgs e)
+        {
+            rollMultiplier = (float)rollMultSetBox.Value;
+        }
+
+        private void pitchMultSetBox_ValueChanged(object sender, EventArgs e)
+        {
+            pitchMultiplier = (float)pitchMultSetBox.Value;
+        }
+
+        private void yawMultSetBox_ValueChanged(object sender, EventArgs e)
+        {
+            yawMultiplier = (float)yawMultSetBox.Value;
+        }
+
+        private void gazMultSetBox_ValueChanged(object sender, EventArgs e)
+        {
+            gazMultiplier = (float)gazMultSetBox.Value;
         }
     }
 }
