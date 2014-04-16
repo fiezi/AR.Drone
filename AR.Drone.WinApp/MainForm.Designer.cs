@@ -69,11 +69,17 @@
             this.yawMultSetBox = new System.Windows.Forms.NumericUpDown();
             this.gazMultSetBox = new System.Windows.Forms.NumericUpDown();
             this.StartBtnLabel = new System.Windows.Forms.Label();
+            this.maxYaw = new System.Windows.Forms.NumericUpDown();
+            this.maxVz = new System.Windows.Forms.NumericUpDown();
+            this.maxYawLabel = new System.Windows.Forms.Label();
+            this.maxVzLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rollMultSetBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pitchMultSetBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yawMultSetBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gazMultSetBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxYaw)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxVz)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStart
@@ -504,17 +510,95 @@
             // StartBtnLabel
             // 
             this.StartBtnLabel.AutoSize = true;
-            this.StartBtnLabel.Location = new System.Drawing.Point(174, 530);
+            this.StartBtnLabel.Location = new System.Drawing.Point(607, 608);
             this.StartBtnLabel.Name = "StartBtnLabel";
             this.StartBtnLabel.Size = new System.Drawing.Size(45, 13);
             this.StartBtnLabel.TabIndex = 37;
             this.StartBtnLabel.Text = "StartBtn";
+            // 
+            // maxYaw
+            // 
+            this.maxYaw.DecimalPlaces = 1;
+            this.maxYaw.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.maxYaw.Location = new System.Drawing.Point(107, 529);
+            this.maxYaw.Maximum = new decimal(new int[] {
+            61,
+            0,
+            0,
+            65536});
+            this.maxYaw.Minimum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            65536});
+            this.maxYaw.Name = "maxYaw";
+            this.maxYaw.Size = new System.Drawing.Size(52, 20);
+            this.maxYaw.TabIndex = 38;
+            this.maxYaw.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // maxVz
+            // 
+            this.maxVz.DecimalPlaces = 1;
+            this.maxVz.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.maxVz.Location = new System.Drawing.Point(107, 562);
+            this.maxVz.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.maxVz.Minimum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.maxVz.Name = "maxVz";
+            this.maxVz.Size = new System.Drawing.Size(52, 20);
+            this.maxVz.TabIndex = 39;
+            this.maxVz.Value = new decimal(new int[] {
+            1500,
+            0,
+            0,
+            0});
+            // 
+            // maxYawLabel
+            // 
+            this.maxYawLabel.AutoSize = true;
+            this.maxYawLabel.Location = new System.Drawing.Point(171, 531);
+            this.maxYawLabel.Name = "maxYawLabel";
+            this.maxYawLabel.Size = new System.Drawing.Size(47, 13);
+            this.maxYawLabel.TabIndex = 40;
+            this.maxYawLabel.Text = "maxYaw";
+            // 
+            // maxVzLabel
+            // 
+            this.maxVzLabel.AutoSize = true;
+            this.maxVzLabel.Location = new System.Drawing.Point(171, 564);
+            this.maxVzLabel.Name = "maxVzLabel";
+            this.maxVzLabel.Size = new System.Drawing.Size(38, 13);
+            this.maxVzLabel.TabIndex = 41;
+            this.maxVzLabel.Text = "maxVz";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 633);
+            this.Controls.Add(this.maxVzLabel);
+            this.Controls.Add(this.maxYawLabel);
+            this.Controls.Add(this.maxVz);
+            this.Controls.Add(this.maxYaw);
             this.Controls.Add(this.StartBtnLabel);
             this.Controls.Add(this.gazMultSetBox);
             this.Controls.Add(this.yawMultSetBox);
@@ -559,6 +643,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pitchMultSetBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yawMultSetBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gazMultSetBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxYaw)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxVz)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,6 +692,10 @@
         private System.Windows.Forms.NumericUpDown yawMultSetBox;
         private System.Windows.Forms.NumericUpDown gazMultSetBox;
         private System.Windows.Forms.Label StartBtnLabel;
+        private System.Windows.Forms.NumericUpDown maxYaw;
+        private System.Windows.Forms.NumericUpDown maxVz;
+        private System.Windows.Forms.Label maxYawLabel;
+        private System.Windows.Forms.Label maxVzLabel;
     }
 }
 

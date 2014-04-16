@@ -45,7 +45,7 @@ namespace AR.Drone.WinApp
         public Joystick myJoy;
         public IList<DeviceInstance> myList;
         public byte[] hidData = new byte[32];
-        public float deadZone = 0.15f;
+        public float deadZone = 0.5f;
         public float yawMultiplier = 1.0f;
         public float pitchMultiplier = 1.0f;
         public float rollMultiplier = 1.0f;
@@ -365,6 +365,11 @@ namespace AR.Drone.WinApp
 
 
                     //send all changes in one pice
+                    settings.Control.AltitudeMax = 10000;    //it's over NEIN THOUSAND!!!
+                    settings.Control.ControlVzMax = (float)maxVz.Value;
+                    settings.Control.ControlYaw = (float)maxYaw.Value;
+                    //settings.Control.Con
+
                     _droneClient.Send(settings);
                 });
             sendConfigTask.Start();
@@ -521,11 +526,21 @@ namespace AR.Drone.WinApp
             oneVeLabel.Text = oneVe.ToString();
             trigBtnLabel.Text = trigBtn.ToString();
             twoHoLabel.Text = twoHo.ToString();
-           
             
-            _droneClient.Progress(FlightMode.Progressive, yaw: twoHo * yawMultiplier, pitch: oneVe * pitchMultiplier, roll: oneHo * rollMultiplier, gaz: trigBtn * gazMultiplier);
+            
+            //if (twoHo==0.0f && oneVe==0.0f && oneHo == 0.0f)
+            if (myJoy.GetCurrentState().IsPressed(2))
+            {
+                StartBtnLabel.Text = "Hover!";
+                _droneClient.Hover();
+                return;
+            }
+            
+            _droneClient.ProgressWithMagneto(FlightMode.Progressive, yaw: twoHo * yawMultiplier, pitch: oneVe * pitchMultiplier, roll: oneHo * rollMultiplier, gaz: trigBtn * gazMultiplier);
+            //_droneClient.Progress(FlightMode.AbsoluteControl, yaw: 1.0f);//, pitch: oneVe * pitchMultiplier, roll: oneHo * rollMultiplier, gaz: trigBtn * gazMultiplier);
 
-
+            
+            
             return;             
 
         }
